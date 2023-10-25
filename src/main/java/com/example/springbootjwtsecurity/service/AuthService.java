@@ -35,9 +35,7 @@ public class AuthService {
         User user = userRepository.findByEmail(email).orElseThrow(() -> {
             throw new RuntimeException("not found:" + email + " email");
         });
-        System.out.println(user.getPassword());
-        System.out.println(passwordEncoder.encode(password));
-        if (!passwordEncoder.matches(password,user.getPassword())) {
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
         String token = jwtUtils.generateToken(user.getEmail());

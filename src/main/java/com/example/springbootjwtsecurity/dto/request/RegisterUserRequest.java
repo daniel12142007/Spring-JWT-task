@@ -6,7 +6,7 @@ import lombok.Data;
 // TODO: 9
 @Data
 @AllArgsConstructor
-public class RegisterUserRequest {
+public class  RegisterUserRequest {
     private String fullName;
     private String email;
     private String password;
