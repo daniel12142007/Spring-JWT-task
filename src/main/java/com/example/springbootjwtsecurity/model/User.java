@@ -12,20 +12,12 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class User {
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullName;
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
-
-    public User(String email) {
-    }
-
-    public User() {
-
-    }
 }

@@ -23,11 +23,11 @@ public class JwtUtils {
                 .withIssuedAt(new Date())
                 .withIssuer("daniel_tamoe")
                 .withExpiresAt(Date.from(ZonedDateTime.now().plusMonths(1).toInstant()))
-                .sign(Algorithm.HMAC256(secret));
+                .sign(Algorithm.HMAC512(secret));
     }
 
     public String validateTokenAndRetrieveClaim(String token) {
-        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(secret))
+        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC512(secret))
                 .withSubject("User details")
                 .withIssuer("daniel_tamoe")
                 .build();
