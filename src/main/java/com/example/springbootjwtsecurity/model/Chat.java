@@ -11,9 +11,9 @@ public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "chat")
-    private List<Notification> notifications;
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @OneToMany(mappedBy = "chat")
+    private List<Notification> notifications;
 }

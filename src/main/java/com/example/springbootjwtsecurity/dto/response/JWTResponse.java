@@ -12,9 +12,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JWTResponse {
-
     private String email;
     private String token;
     private String message;
     private Role role;
+
+    public JWTResponse(String message) {
+        this.message = message;
+    }
 }

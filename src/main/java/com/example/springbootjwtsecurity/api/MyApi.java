@@ -18,20 +18,20 @@ public class MyApi {
 
     @PostMapping("/register")
     @PermitAll
-    public String register(@RequestBody RegisterUserRequest request) {
+    public JWTResponse register(@RequestBody RegisterUserRequest request) {
         if (request.getPassword().length() <= 6) {
-            return "The password must contain at least 6!";
+            return new JWTResponse("The password must contain at least 6!");
         } else if (request.getEmail().matches("@gmail.com")) {
-            return "The email must contain @gmail.com";
+            return new JWTResponse("The email must contain @gmail.com");
         }
         return authService.register(request);
     }
 
     @PostMapping("/login")
     @PermitAll
-    public JWTResponse login(@RequestParam(defaultValue = "null") String email,
-                             @RequestParam(defaultValue = "null") String password) {
-        return (email.equals("null") && password.equals("null")) ? authService.login(email, password) : null;
+    public JWTResponse login(@RequestParam(defaultValue = "email") String email,
+                             @RequestParam(defaultValue = "pas") String password) {
+        return (email.equals("email") && password.equals("pas")) ? null : authService.login(email, password);
     }
 
     @GetMapping("/admin")

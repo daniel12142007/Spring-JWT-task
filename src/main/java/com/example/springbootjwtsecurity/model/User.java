@@ -1,11 +1,10 @@
 package com.example.springbootjwtsecurity.model;
 
 import com.example.springbootjwtsecurity.model.enums.Role;
-import com.fasterxml.jackson.annotation.JacksonInject;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 // TODO: 2
@@ -13,6 +12,9 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +24,7 @@ public class User {
     private String description;
     private String email;
     private String password;
+    private LocalDateTime date_register;
     @Enumerated(EnumType.STRING)
     private Role role;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
