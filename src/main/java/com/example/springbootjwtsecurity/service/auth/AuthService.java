@@ -1,4 +1,4 @@
-package com.example.springbootjwtsecurity.service;
+package com.example.springbootjwtsecurity.service.auth;
 
 import com.example.springbootjwtsecurity.config.JwtUtils;
 import com.example.springbootjwtsecurity.dto.request.RegisterUserRequest;
@@ -32,8 +32,13 @@ public class AuthService {
                 .date_register(LocalDateTime.now())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
+        if (request.getPassword().matches("@gmail.com")) {
+            throw new RuntimeException("mail should end with @gmail.com");
+        }
         if (userRepository.existsByEmail(request.getEmail()))
-            throw new RuntimeException("not found email:" + request.getEmail() + " email");
+            throw new RuntimeException("found email:" + request.getEmail() + " email");
+        if (userRepository.existsByUsername(request.getUsername()))
+            throw new RuntimeException("found username:" + request.getUsername() + " username");
         userRepository.save(user);
         Chat chat = new Chat();
         chat.setUser(user);
@@ -48,7 +53,7 @@ public class AuthService {
     }
 
     public JWTResponse login(String email, String password) {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> {
+        User user = userRepository.findByUsernameOrEmail(email).orElseThrow(() -> {
             throw new RuntimeException("not found:" + email + " email");
         });
         if (!passwordEncoder.matches(password, user.getPassword())) {

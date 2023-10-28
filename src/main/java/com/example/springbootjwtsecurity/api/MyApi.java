@@ -2,7 +2,7 @@ package com.example.springbootjwtsecurity.api;
 
 import com.example.springbootjwtsecurity.dto.request.RegisterUserRequest;
 import com.example.springbootjwtsecurity.dto.response.JWTResponse;
-import com.example.springbootjwtsecurity.service.AuthService;
+import com.example.springbootjwtsecurity.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package com.example.springbootjwtsecurity.config;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.example.springbootjwtsecurity.service.AuthUserDetailsService;
+import com.example.springbootjwtsecurity.service.auth.AuthUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

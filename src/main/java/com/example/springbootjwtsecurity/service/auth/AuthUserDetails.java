@@ -1,4 +1,4 @@
-package com.example.springbootjwtsecurity.service;
+package com.example.springbootjwtsecurity.service.auth;
 
 import com.example.springbootjwtsecurity.model.User;
 import lombok.RequiredArgsConstructor;

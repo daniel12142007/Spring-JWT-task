@@ -1,5 +1,6 @@
 package com.example.springbootjwtsecurity.model;
 
+import com.example.springbootjwtsecurity.model.enums.Gender;
 import com.example.springbootjwtsecurity.model.enums.Role;
 import lombok.*;
 
@@ -25,8 +26,11 @@ public class User {
     private String email;
     private String password;
     private LocalDateTime date_register;
+    private boolean public_account = false;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Chat chat;
     @OneToMany(mappedBy = "user")
@@ -38,6 +42,11 @@ public class User {
     @OneToMany(mappedBy = "favorites")
     private List<Publication> publications;
 
+    @OneToMany(mappedBy = "request_followers")
+    private List<User> requestFollowers;
+    @ManyToOne
+    @JoinColumn(name = "subscription_request_id")
+    private User request_followers;
     @ManyToMany
     @JoinTable(name = "followers",
             joinColumns = @JoinColumn(name = "user_id"),
