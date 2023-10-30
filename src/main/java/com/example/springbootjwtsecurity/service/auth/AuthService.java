@@ -5,6 +5,7 @@ import com.example.springbootjwtsecurity.dto.request.RegisterUserRequest;
 import com.example.springbootjwtsecurity.dto.response.JWTResponse;
 import com.example.springbootjwtsecurity.model.Chat;
 import com.example.springbootjwtsecurity.model.User;
+import com.example.springbootjwtsecurity.model.enums.Gender;
 import com.example.springbootjwtsecurity.model.enums.Role;
 import com.example.springbootjwtsecurity.repository.ChatRepository;
 import com.example.springbootjwtsecurity.repository.UserRepository;
@@ -28,6 +29,7 @@ public class AuthService {
                 .builder()
                 .role(Role.USER)
                 .email(request.getEmail())
+                .gender(Gender.NOT_SPECIFIED)
                 .fullName(request.getFullName())
                 .username(request.getUsername())
                 .date_register(LocalDateTime.now())
