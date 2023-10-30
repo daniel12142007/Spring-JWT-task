@@ -47,16 +47,17 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "subscription_request_id")
     private User request_followers;
-    @ManyToMany
-    @JoinTable(name = "followers",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "followers_id"))
-    private List<User> followers;
+    //    @ManyToMany
+//    @JoinTable(name = "followers",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "followers_id"))
+//    private List<User> followers;
     @ManyToMany
     @JoinTable(name = "following",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "following_id"))
     private List<User> following;
+
     @ManyToMany
     @JoinTable(name = "likes",
             joinColumns = @JoinColumn(name = "user_id"),

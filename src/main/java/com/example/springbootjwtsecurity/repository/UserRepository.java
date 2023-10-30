@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 // TODO: 3
@@ -21,4 +22,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByEmail(String email);
 
     boolean existsByUsername(String username);
+
+    //вывод всех потписок
+    @Query("select u from User u join u.following e where e.email = :email")
+    List<User> findByFollowing(@Param(value = "email") String email);
+
+    //проверяет что my(email) потписан ли на email(email) если да то возращает User
+    @Query("select u from User u join u.following e where u.email = :my and e.email = :email")
+    User findUserFollowing(@Param(value = "my") String my, @Param(value = "email") String email);
 }

@@ -1,9 +1,18 @@
 package com.example.springbootjwtsecurity.dto.response;
 
 import com.example.springbootjwtsecurity.model.enums.Gender;
+import com.example.springbootjwtsecurity.model.enums.Role;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class UserResponse {
     private Long id;
     private String fullName;
@@ -11,5 +20,10 @@ public class UserResponse {
     private String description;
     private String email;
     private Gender gender;
-    private String role;
+    private Role role;
+    private LocalDateTime date_register;
+    private Integer countFollowers;
+    private Integer countFollowing;
+    private Integer countPublication;
+    private boolean subscribed;//потписался
 }
