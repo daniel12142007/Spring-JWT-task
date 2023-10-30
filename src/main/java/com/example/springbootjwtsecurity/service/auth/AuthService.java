@@ -28,6 +28,7 @@ public class AuthService {
                 .builder()
                 .role(Role.USER)
                 .email(request.getEmail())
+                .fullName(request.getFullName())
                 .username(request.getUsername())
                 .date_register(LocalDateTime.now())
                 .password(passwordEncoder.encode(request.getPassword()))
