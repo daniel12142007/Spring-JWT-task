@@ -19,12 +19,10 @@ public class FollowApi {
     public UserResponse followingUserByEmail(@RequestParam(defaultValue = "null") String email) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String my = authentication.getName();
-        if (my == null) {
+        if (my == null)
             return new UserResponse("You are not logged in to your account!");
-        }
-        if (email.equals(my)) {
+        if (email.equals(my))
             return new UserResponse("You can't follow yourself!");
-        }
         return (!email.equals("null")) ? followService.following(
                 my, email
         ) : null;

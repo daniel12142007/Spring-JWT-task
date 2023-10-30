@@ -1,5 +1,6 @@
 package com.example.springbootjwtsecurity.api;
 
+import com.example.springbootjwtsecurity.dto.request.UserUpdateRequest;
 import com.example.springbootjwtsecurity.dto.response.UserResponse;
 import com.example.springbootjwtsecurity.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -22,11 +23,19 @@ public class UserApi {
     public UserResponse findByEmailOrUsername(@RequestParam(defaultValue = "null") String username) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
-        if (email == null) {
+        if (email == null)
             return new UserResponse("you are not logged in to your account");
-        }
         return (!username.equals("null")) ? userService.findByEmailOrUsername(
                 username, email
         ) : null;
+    }
+
+    @PutMapping("update")
+    public UserResponse update(@RequestBody UserUpdateRequest request) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        if (username == null)
+            return new UserResponse("you are not logged in to your account");
+        return userService.updateUserByEmail(request, username);
     }
 }

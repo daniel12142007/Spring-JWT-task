@@ -18,11 +18,10 @@ public class AuthApi {
     @PostMapping("/register")
     @PermitAll
     public JWTResponse register(@RequestBody RegisterUserRequest request) {
-        if (request.getPassword().length() <= 6) {
+        if (request.getPassword().length() <= 6)
             return new JWTResponse("The password must contain at least 6!");
-        } else if (!request.getEmail().contains("@gmail.com")) {
+        else if (!request.getEmail().contains("@gmail.com"))
             return new JWTResponse("The email must contain @gmail.com");
-        }
         return authService.register(request);
     }
 
