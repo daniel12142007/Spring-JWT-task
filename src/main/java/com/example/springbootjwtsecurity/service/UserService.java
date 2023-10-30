@@ -35,6 +35,7 @@ public class UserService {
         response.setCountPublication(user.getMyPublication() != null ?
                 user.getMyPublication().size() : 0);
         response.setSubscribed(userRepository.findUserFollowing(my.getEmail(), user.getEmail()) != null);
+        response.setMessage("Successfully!");
         return response;
     }
 }

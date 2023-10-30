@@ -26,4 +26,9 @@ public class UserResponse {
     private Integer countFollowing;
     private Integer countPublication;
     private boolean subscribed;//потписался
+    private String message;
+
+    public UserResponse(String message) {
+        this.message = message;
+    }
 }

@@ -3,6 +3,7 @@ package com.example.springbootjwtsecurity.api;
 import com.example.springbootjwtsecurity.dto.response.UserResponse;
 import com.example.springbootjwtsecurity.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,13 @@ public class UserApi {
 
     @GetMapping("find/by/email/or/username")
     public UserResponse findByEmailOrUsername(@RequestParam(defaultValue = "null") String username) {
-        return (!username.equals("null")) ? userService.findByEmailOrUsername(username, SecurityContextHolder.getContext().getAuthentication().getName()) : null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        if (email == null) {
+            return new UserResponse("you are not logged in to your account");
+        }
+        return (!username.equals("null")) ? userService.findByEmailOrUsername(
+                username, email
+        ) : null;
     }
 }

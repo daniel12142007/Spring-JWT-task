@@ -6,6 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 // TODO: 2
@@ -43,7 +44,7 @@ public class User {
     private List<Publication> publications;
 
     @OneToMany(mappedBy = "request_followers")
-    private List<User> requestFollowers;
+    private List<User> requestFollowers = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "subscription_request_id")
     private User request_followers;
@@ -56,11 +57,11 @@ public class User {
     @JoinTable(name = "following",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "following_id"))
-    private List<User> following;
+    private List<User> following = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "likes",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "publication_id"))
-    private List<Publication> likes;
+    private List<Publication> likes = new ArrayList<>();
 }
