@@ -24,6 +24,10 @@ public class UserService {
         return getUserResponse(myEmail, user);
     }
 
+    public UserResponse myProfile(String email) {
+        return getUserResponse(email);
+    }
+
     public UserResponse updateUserByEmail(UserUpdateRequest update, String email) {
         User user = findByEmail(email);
         user.setFullName(update.getFullName() != null ? update.getFullName() : user.getFullName());

@@ -33,9 +33,18 @@ public class UserApi {
     @PutMapping("update")
     public UserResponse update(@RequestBody UserUpdateRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        if (username == null)
+        String email = authentication.getName();
+        if (email == null)
             return new UserResponse("you are not logged in to your account");
-        return userService.updateUserByEmail(request, username);
+        return userService.updateUserByEmail(request, email);
+    }
+
+    @GetMapping("my/profile")
+    public UserResponse myProfile() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        if (email == null)
+            return new UserResponse("you are not logged in to your account");
+        return userService.myProfile(email);
     }
 }
