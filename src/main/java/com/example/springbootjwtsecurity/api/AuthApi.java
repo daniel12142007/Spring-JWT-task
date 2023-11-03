@@ -24,7 +24,6 @@ public class AuthApi {
             return new JWTResponse("The email must contain @gmail.com");
         return authService.register(request);
     }
-
     @PostMapping("/login")
     @PermitAll
     public JWTResponse login(@RequestParam(defaultValue = "email") String email,
