@@ -30,4 +30,5 @@ public class AuthApi {
                              @RequestParam(defaultValue = "pas") String password) {
         return (email.equals("email") && password.equals("pas")) ? null : authService.login(email, password);
     }
+
 }
