@@ -1,7 +1,9 @@
 package com.example.springbootjwtsecurity3.api;
 
-import com.example.springbootjwtsecurity3.service.Auth;
+import com.example.springbootjwtsecurity3.dto.response.UserResponse;
+import com.example.springbootjwtsecurity3.service.AuthService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,17 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class UserApi {
-    private final Auth auth;
+    private final AuthService authService;
 
     @PostMapping("save")
-    public String save(@RequestParam String email, @RequestParam String password, @RequestParam String name) {
-        auth.save(name, email, password);
-        return "ok";
+    public UserResponse save(@RequestParam String name,
+                             @RequestParam String email,
+                             @RequestParam String password) {
+        return authService.save(name, email, password);
     }
 
     @PostMapping("login")
-    public String save(@RequestParam String email, @RequestParam String password) {
-        return auth.login(email, password);
+    public UserResponse save(@RequestParam String email, @RequestParam String password) {
+        return authService.login(email, password);
     }
-
 }
