@@ -3,6 +3,7 @@ package com.example.springbootjwtsecurity3.api;
 import com.example.springbootjwtsecurity3.dto.response.ClientResponse;
 import com.example.springbootjwtsecurity3.service.ClientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/client")
+@PreAuthorize("hasAnyAuthority('USER','ADMIN')")
 public class ClientApi {
     private final ClientService clientService;
 

@@ -1,6 +1,7 @@
 package com.example.springbootjwtsecurity3.service;
 
 import com.example.springbootjwtsecurity3.config.JwtUtils;
+import com.example.springbootjwtsecurity3.dto.request.AuthRequest;
 import com.example.springbootjwtsecurity3.dto.response.UserResponse;
 import com.example.springbootjwtsecurity3.model.User;
 import com.example.springbootjwtsecurity3.model.enums.Role;
@@ -28,9 +29,9 @@ public class AuthService {
         return map(userRepository.save(user));
     }
 
-    public UserResponse login(String email, String password) {
-        User user = userRepository.findByEmail(email).get();
-        if (!passwordEncoder.matches(password, user.getPassword())) {
+    public UserResponse login(AuthRequest request) {
+        User user = userRepository.findByEmail(request.getEmail()).get();
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new RuntimeException("invalid password");
         }
         return map(user);
